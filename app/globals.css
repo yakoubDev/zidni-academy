@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #02713f;
+  --secondary: #EF7B45;
+  --background: #042A2B;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sora: var(--font-sora);
+  --color-accent: var(--accent);
+  --color-secondary: var(--secondary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+
+@layer base {
+  
+  body {
+    @apply bg-background text-white leading-loose font-sora  p-2 px-2 lg:px-6 xl:px-8;
   }
+  
+  p{
+    @apply text-sm xl:text-base max-w-[400px] md:max-w-[600px] lg:max-w-[700px];
+  }
+  input,select{
+    @apply outline-none h-12 rounded indent-4 border-white/60 border-[1px] focus:border-accent w-full;
+  }
+  textarea{
+     @apply outline-none  rounded pl-4 ring-white/70 ring-[1px] focus:ring-accent pt-2 w-full
+  }
+  option{
+    @apply bg-gray-900;
+  }
+
+.h1 {
+  @apply text-[3.2rem] xl:text-[4.9rem] leading-tight font-semibold;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.h2 {
+  @apply text-3xl xl:text-5xl leading-snug font-semibold; 
 }
+
+.h3 {
+  @apply text-xl xl:text-2xl font-medium;
+}
+
+  .text-outline{
+    -webkit-text-stroke: 1px #ffffff;
+  }
+
+  .text-outline-hover{
+    -webkit-text-stroke: 1px #00ff99;
+  }
+
+}
+
+
+@layer components{
+.bg_gradient {
+  @apply bg-gradient-to-br from-[#96e9c8] via-[#79cfad] to-[#479c75];
+}
+.text_gradient {
+  @apply bg-gradient-to-br from-[#02713f] via-[#79cfad] to-[#479c75] bg-clip-text text-transparent;
+}
+.btn {
+  @apply px-3 lg:px-4 py-1 lg:py-2 rounded-xl font-medium text-white 
+         bg-gradient-to-r from-[#02713f] to-[#38b77f] 
+         transition-all duration-300 shadow-md cursor-pointer;
+}
+
+.btn:hover {
+  @apply scale-105 shadow-lg 
+         from-[#38b77f] to-[#02713f]; /* reverse gradient */
+}
+}
+
+
+
+
+/* Animations */
+.slide-left{-webkit-animation:slide-left .5s cubic-bezier(.25,.46,.45,.94) both;animation:slide-left .5s cubic-bezier(.25,.46,.45,.94) both}
+@-webkit-keyframes slide-left{0%{-webkit-transform:translateX(100px);transform:translateX(100px)}100%{-webkit-transform:translateX(100px);transform:translateX(100px)}}@keyframes slide-left{0%{-webkit-transform:translateX(100px);transform:translateX(100px)}100%{-webkit-transform:translateX(0px);transform:translateX(0px)}}
