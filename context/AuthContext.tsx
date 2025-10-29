@@ -11,7 +11,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingUser, setLoadingUser] = useState(true);
     const router = useRouter();
     
     async function fetchUser() {
@@ -28,11 +28,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch {
         setUser(null);
       } finally {
-        setLoading(false);
+        setLoadingUser(false);
       }
     }
   useEffect(() => {
-
     fetchUser();
   }, []);
 
@@ -52,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, isLoggedIn: !!user, setUser, logout, fetchUser }}>
+    <AuthContext.Provider value={{ user, loadingUser, isLoggedIn: !!user, setUser, logout, fetchUser }}>
       {children}
     </AuthContext.Provider>
   );

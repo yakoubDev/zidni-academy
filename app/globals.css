@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --accent: #02713f;
+  --accent:#00bc7d;
   --secondary: #EF7B45;
   --background: #042A2B;
 }
@@ -14,7 +14,11 @@
   --color-secondary: var(--secondary);
 }
 
-
+*{
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scroll-padding-top: 40px;
+}
 
 @layer base {
   

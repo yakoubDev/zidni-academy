@@ -13,17 +13,17 @@ export const links: LinkType[] = [
     path: "/",
   },
   {
-    name: "Services",
-    path: "/#services",
+    name: "Classes",
+    path: "/#classes",
   },
   {
-    name: "About",
+    name: "About us",
     path: "/#about",
   },
-  {
-    name: "Plans",
-    path: "/#plans",
-  },
+  // {
+  //   name: "Plans",
+  //   path: "/#plans",
+  // },
 ];
 
 const Nav = () => {
@@ -70,7 +70,7 @@ const Nav = () => {
             </Link>
           )}
 
-          <Link href={"/apply"}>
+          <Link href={`${user ? "/apply" : "/login"}`}>
             <button className="btn">Apply Now</button>
           </Link>
         </div>

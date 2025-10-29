@@ -39,7 +39,7 @@ const Login = () => {
       }
 
       setUser(result.user);
-      toast.success("Login successeful");
+      toast.success("Welcome back !");
       router.push("/");
     } catch (error) {
       console.error(error);

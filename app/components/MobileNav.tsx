@@ -39,8 +39,8 @@ const MobileNav: React.FC<MobileNavProps> = ({ links }) => {
 
   return (
     <div className="flex gap-4 items-center lg:hidden z-50">
-      <Link className="btn" href="/apply">
-        Apply Now
+      <Link href={`${user ? "/apply" : "/login"}`}>
+        <button className="btn">Apply Now</button>
       </Link>
       <RiMenu4Line
         size={32}
