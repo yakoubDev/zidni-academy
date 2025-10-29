@@ -1,6 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
-const enrollementSchema = new Schema(
+const enrollmentSchema = new Schema(
   {
     userId: {
       type: String,
@@ -40,7 +40,7 @@ const enrollementSchema = new Schema(
   }
 );
 
-const Enrollement =
-  models.Enrollement || model("Enrollement", enrollementSchema);
+const Enrollment =
+  models.Enrollment || model("Enrollment", enrollmentSchema);
 
-export default Enrollement;
+export default Enrollment;

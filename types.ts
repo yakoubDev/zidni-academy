@@ -11,6 +11,7 @@ export interface User {
   phone: string;
   gender: string;
   role: string;
+  classes: [string];
 }
 
 
@@ -22,3 +23,12 @@ export interface AuthContextType {
   logout: () => Promise<void>;
   fetchUser: () => Promise<void>;
 }
+
+
+export type ClassType = {
+  title: string;
+  description: string;
+  price: string;
+  level: string;
+  icon: string;
+};

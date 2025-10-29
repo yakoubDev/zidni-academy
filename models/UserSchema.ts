@@ -23,14 +23,18 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
-  gender:{
+  gender: {
     type: String,
-    enum: ["Male", "Female"]
+    enum: ["Male", "Female"],
   },
-  role:{
+  role: {
     type: String,
     enum: ["student", "teacher", "admin", "owner"],
     default: "student",
+  },
+  classes: {
+    type: [String], // array of class titles
+    default: [],
   },
 });
 

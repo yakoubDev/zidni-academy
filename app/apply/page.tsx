@@ -5,11 +5,13 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Spinner from "../components/Spinner";
+import { ClassType } from "@/types";
 
 const Apply = () => {
   const { user, loadingUser } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [filteredClasses, setFilteredClassses] = useState<ClassType[]>([]);
   const [formData, setFormData] = useState({
     selectedClass: "",
     experience: "",
@@ -20,7 +22,18 @@ const Apply = () => {
     if (!loadingUser && !user) {
       router.push("/login");
     }
-  }, [user,loadingUser]);
+  }, [user, loadingUser]);
+
+  useEffect(() => {
+    if (user) {
+      const filtered = classes.filter(
+        (cls) => !(user?.classes || []).includes(cls.title)
+      );
+      console.log("User classes", user?.classes);
+      setFilteredClassses(filtered);
+    }
+  }, [user]);
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -60,14 +73,14 @@ const Apply = () => {
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong...");
-    }finally{
+    } finally {
       setLoading(true);
     }
   };
 
   // ✅ Show loading while checking auth
   if (!user) {
-    return <Spinner />
+    return <Spinner />;
   }
   return (
     <div className="min-h-screen py-20 px-4">
@@ -87,7 +100,7 @@ const Apply = () => {
         </div>
 
         {/* Form Container */}
-        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 lg:p-10">
+        <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 lg:p-10">
           <div className="space-y-6">
             {/* Class Selection */}
             <div>
@@ -98,6 +111,7 @@ const Apply = () => {
                 <label className="block text-white/80 text-sm mb-2">
                   Choose a Class *
                 </label>
+
                 <select
                   name="selectedClass"
                   value={formData.selectedClass}
@@ -106,7 +120,7 @@ const Apply = () => {
                   required
                 >
                   <option value="">Select a class</option>
-                  {classes.map((cls, index) => (
+                  {filteredClasses.map((cls, index) => (
                     <option key={index} value={cls.title}>
                       {cls.icon} {cls.title} - {cls.price}
                     </option>
@@ -164,7 +178,7 @@ const Apply = () => {
               Privacy Policy
             </p>
           </div>
-        </div>
+        </form>
       </div>
 
       {/* Style tag for select options */}

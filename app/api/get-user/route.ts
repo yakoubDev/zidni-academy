@@ -28,6 +28,7 @@ export async function GET(req: NextRequest) {
       phone: user.phone,
       gender: user.gender,
       role: user.role,
+      classes: user.classes
     };
 
     return NextResponse.json({ user: userData }, { status: 200 });
